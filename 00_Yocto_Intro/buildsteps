@@ -1,0 +1,73 @@
+Yocto project:
+
+Ensure system requirements 
+ It should be Linux based operating systems (Ubuntu, Fedora, CentOs,etc).
+Muti-core processor
+Memory Atleast 8GB of RAM. more RAM beneficial for fast builds and smoother performance.
+Atleast 100GB of disk space.
+Check for packages git,repo,wget,diffstat,chrpath,make,gcc,gwak,textinfo,bzip2.
+	How to check the system requirements 
+		i) CPU info : lscpu
+		ii) Ram info : free -h
+		iii) Disk space Info : df -h
+		iv) how to check the packages : apt-cache show <package_name>
+			Or to list All installed packages : dpkg -l
+If packages are not included try to Install Required packages 
+Sudo apt install <package_name>
+Make sure you have necessary packages like git,repo 
+Creat a folder and git clone yocto project 
+mkdir yocto
+cd yocto
+ 		git clone git://git.yoctoproject.org/poky
+Source the build environment script
+-Source the environment script for your target machine.
+cd poky
+source oe-iniit-build-env build.
+After generating build environment, you will be getting a build folder and in build folder you will be having a conf folder.
+The conf folder contains : 
+a) local. Conf  
+ -It is which allows you to customize various build settings.
+-Parameters are target hardware , distribution, package types, image features, installed packages, build settings, temporary directories, and caching locations.
+b) bblayer.conf
+-it is configuration file that defines the layers to be used during the build.
+-it specifies the paths to the layers containing recipes and meta data needed.
+Start your build with 
+Bitbake core-image-minimal : Minimal image with essential components.
+Bitbake core-image-sato : Image with the sato lightweight desktop enviromnent.
+Bitbake core-image-base : a base image to build upon.
+Bitbake core-image-minimal
+Wait for build, it will take some time, it will fetch sources, complie, and generate the image. This may take some time based on your system performance and internet speed.
+After the build, find the image at ‘tmp/deploy/image/<machine>/core-image-minimal”.
+ Transfer this to image to an SD card for microcontroller
+ Insert the SD card into your microcontroller and boot it up.
+
+
+If your target machine is Raspberrypi3.
+
+Clone the raspberry pi meta layer repository to your desired location.
+	Git clone https://github.com/agherzan/meta-rpi.git
+Configure the Build
+source oe-iniit-build-env build_rpi
+Add the Meta layer to BBLAYERS in local.conf.
+BBLAYERS ?= “/path/to/your/poky/meta-rpi \”
+Open the ‘conf/local.conf’ and set MACHINE = “raspberrypi3”.
+Build the image
+Bitbake core-image-minimal.
+Deploy the image
+‘tmp/deploy/images/raspberrypi3/core-image-minimal-rasperypi3.wic.gz’
+Run on Target
+Flash the image on SD card and insert into raspberrypi3.
+
+If your target is qemu
+Qemu – quick EMUlator, the yocto support it by default.
+So no need of cloning anything
+Configure the Build
+source oe-iniit-build-env build_qemu
+Already that is included in BBLAYERS in local.conf
+Open the ‘conf/local.conf’ and set MACHINE = “qemuarm”.
+Build the image
+Bitbake core-image-sato (as it support light weight desktop).
+Run on Image
+Runqemu qemuarm
+ 
+
