@@ -1,0 +1,98 @@
+Building an x86 Emulation Image with python package  full example illustration on yocto linux
+
+Building an x86 emulation image with specific Python packages using the Yocto Project involves creating a custom image recipe that includes the desired Python packages. Here's a step-by-step example illustration:
+
+Note: This example assumes you have set up the Yocto Project build environment as described in previous responses.
+
+Clone the Yocto Project Repository:
+
+If you haven't already, clone the Yocto Project repository to your workspace:
+
+```bash
+
+git clone git://git.yoctoproject.org/poky
+```
+
+Initialize the Build Environment:
+
+Change to the poky directory and initialize the build environment:
+
+```bash
+
+cd poky
+source oe-init-build-env build-x86
+```
+
+This command sets up a new build environment in a directory called build-x86.
+
+Customize Configuration:
+
+Edit the conf/local.conf file in the build-x86 directory to customize your build for x86 emulation. You can specify the target machine and other build settings. For example:
+
+```bash
+
+MACHINE = "qemu-x86-64"
+IMAGE_FEATURES += "ssh-server-openssh"
+```
+
+The qemu-x86-64 machine represents a 64-bit x86 QEMU emulator.
+
+Create a Custom Image Recipe:
+
+Create a custom image recipe to define the contents and configuration of your x86 emulation image. Create a file named my-x86-image.bb (or any name you prefer) in the build-x86 directory:
+
+```bash
+
+touch build-x86/meta-custom/recipes-core/images/my-x86-image.bb
+```
+
+Edit the my-x86-image.bb file and define your custom image recipe. In this example, we include specific Python packages (e.g., python3-package1 and python3-package2) in the image:
+
+```bash
+
+DESCRIPTION = "My x86 Emulation Image with Python Packages"
+LICENSE = "MIT"
+
+inherit core-image
+
+IMAGE_INSTALL += "python3-package1 python3-package2"
+```
+
+Replace python3-package1 and python3-package2 with the names of the Python packages you want to include in your image.
+
+Add the Custom Image to the Image List:
+
+Edit the build-x86/conf/local.conf file again to add your custom image to the list of images to be built:
+
+```bash
+IMAGE_FSTYPES_append = " wic.gz"
+IMAGE_CLASSES += "image_types"
+IMAGE_TYPES = "wic wic.gz"
+IMAGE_NAME_wic = "my-x86-image"
+```
+
+Build Your Custom x86 Emulation Image with Python Packages:
+
+Build your custom x86 emulation image with the specified Python packages using the bitbake command:
+
+```bash
+bitbake my-x86-image
+```
+
+Run QEMU with Your Custom Image:
+
+After the build is complete, you can run the QEMU emulator with your custom x86 image. For example, to run the 64-bit x86 QEMU emulator:
+
+```
+runqemu qemu-x86-64 nographic slirp
+```
+
+This command launches QEMU with the specified options. The nographic option runs QEMU without a graphical interface, and slirp provides basic networking.
+
+Access the Emulated System:
+
+You can access the emulated x86 system via SSH (if you included the ssh-server-openssh feature) or by using the QEMU monitor console.
+
+This example demonstrates how to set up and build a custom x86 emulation image with specific Python packages using Yocto Project. You can tailor your image by adding or removing Python packages according to your project's requirements.
+
+
