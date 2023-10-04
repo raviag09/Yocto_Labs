@@ -13,6 +13,16 @@ If you haven't already, clone the Yocto Project repository to your workspace:
 git clone git://git.yoctoproject.org/poky
 ```
 
+
+
+
+
+create a custom meta layer:
+
+```bash
+bitbake-layers create-layer /home/ubuntu/poky-dunfell-23.0.2/meta-custom
+```
+
 Initialize the Build Environment:
 
 Change to the poky directory and initialize the build environment:
@@ -20,18 +30,17 @@ Change to the poky directory and initialize the build environment:
 ```bash
 
 cd poky
-source oe-init-build-env build-x86
+source oe-init-build-env meta-custom
 ```
 
-This command sets up a new build environment in a directory called build-x86.
 
 Customize Configuration:
 
-Edit the conf/local.conf file in the build-x86 directory to customize your build for x86 emulation. You can specify the target machine and other build settings. For example:
+Edit the conf/local.conf file in the build-x86 directory to customize your build. You can specify the target machine and other build settings. For example:
 
 ```bash
 
-MACHINE = "qemu-x86-64"
+MACHINE ??= "qemux86-64"
 IMAGE_FEATURES += "ssh-server-openssh"
 ```
 
@@ -43,26 +52,26 @@ Create a custom image recipe to define the contents and configuration of your x8
 
 ```bash
 
-touch build-x86/meta-custom/recipes-core/images/my-x86-image.bb
+touch /home/ubuntu/poky-dunfell-23.0.2/meta-custom/recipes-example/images/my-x86-image.bb
 ```
 
 Edit the my-x86-image.bb file and define your custom image recipe. In this example, we include specific Python packages (e.g., python3-package1 and python3-package2) in the image:
 
 ```bash
 
-DESCRIPTION = "My x86 Emulation Image with Python Packages"
+DESCRIPTION = "Custom x86 Emulation Image"
 LICENSE = "MIT"
 
-inherit core-image
+# Specify the packages to include in the image
+IMAGE_INSTALL += "qemu qemu-native"
 
-IMAGE_INSTALL += "python3-package1 python3-package2"
 ```
 
 Replace python3-package1 and python3-package2 with the names of the Python packages you want to include in your image.
 
 Add the Custom Image to the Image List:
 
-Edit the build-x86/conf/local.conf file again to add your custom image to the list of images to be built:
+Edit the /conf/local.conf file again to add your custom image to the list of images to be built:
 
 ```bash
 IMAGE_FSTYPES_append = " wic.gz"
@@ -70,7 +79,15 @@ IMAGE_CLASSES += "image_types"
 IMAGE_TYPES = "wic wic.gz"
 IMAGE_NAME_wic = "my-x86-image"
 ```
-
+edit the bb layers by adding the custom layer
+```bash
+BBLAYERS ?= " \
+  /home/ubuntu/poky-dunfell-23.0.2/meta \
+  /home/ubuntu/poky-dunfell-23.0.2/meta-poky \
+  /home/ubuntu/poky-dunfell-23.0.2/meta-yocto-bsp \
+  /home/ubuntu/poky-dunfell-23.0.2/meta-custom \
+   "
+   ```
 Build Your Custom x86 Emulation Image with Python Packages:
 
 Build your custom x86 emulation image with the specified Python packages using the bitbake command:
