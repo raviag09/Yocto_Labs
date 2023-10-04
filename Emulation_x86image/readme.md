@@ -36,7 +36,7 @@ source oe-init-build-env meta-custom
 
 Customize Configuration:
 
-Edit the conf/local.conf file in the build-x86 directory to customize your build. You can specify the target machine and other build settings. For example:
+Edit the conf/local.conf file  to customize your build. You can specify the target machine and other build settings. For example:
 
 ```bash
 
