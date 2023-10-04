@@ -20,6 +20,9 @@ git clone git://git.yoctoproject.org/poky
 create a custom meta layer:
 
 ```bash
+bitbake-layers create-layer /home/ubuntu/poky-dunfell-23.0.2/meta-custom
+
+source oe-init-build-env meta-custom
 ubuntu@ip-172-31-48-255:~/poky-dunfell-23.0.2$ bitbake-layers add-layer /home/ubuntu/poky-dunfell-23.0.2/meta-custom
 ```
 
