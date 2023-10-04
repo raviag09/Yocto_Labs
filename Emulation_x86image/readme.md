@@ -33,7 +33,7 @@ Change to the poky directory and initialize the build environment:
 
 ```bash
 
-cd poky
+cd ~/poky-dunfell-23.0.2/meta-custom
 source oe-init-build-env meta-custom
 ```
 
