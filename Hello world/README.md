@@ -120,5 +120,15 @@ ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/build$ bitbake core-image-minimal
  $ runqemu qemux86-64
  
  ```
+### login as root and run the hello command on /usr/bin
+```bash
+ $ login: root
+$ cd /usr/bin
+$ hello
+ # it displays the c print statements
+ ```
+
+
+
  
  
