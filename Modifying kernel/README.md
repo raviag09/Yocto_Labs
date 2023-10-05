@@ -54,6 +54,7 @@ Go to usb_init function and add below lines:
 printk(KERN_INFO"hello :USB Driver Initialized"); printk(KERN_INFO"hello :Patch applied successfully");
 printk(KERN_INFO"hello: Done");
 ```
+<img width="1395" alt="Screen Shot 2023-10-05 at 9 55 05 AM" src="https://github.com/raviag09/Yocto_Labs/assets/131940031/940a7cb2-0706-44a1-956c-6130803f4363">
 
 
 
