@@ -108,7 +108,10 @@ Run QEMU with Your Custom Image:
 
 After the build is complete, you can run the QEMU emulator with your custom x86 image. For example, to run the 64-bit x86 QEMU emulator:
 
+ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/meta-custom/tmp/deploy/images/qemux86-64$ ls
 ```
+
+
 runqemu qemu-x86-64 nographic slirp
 ```
 
