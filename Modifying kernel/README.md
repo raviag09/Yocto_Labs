@@ -84,6 +84,9 @@ cd poky/meta/recipes-kernel/linux
 $mkdir linux-yocto
 ```
 
+<img width="1100" alt="Screen Shot 2023-10-05 at 8 29 31 AM" src="https://github.com/raviag09/Yocto_Labs/assets/131940031/9a6b7766-d74b-4c5c-b81e-c1b7223744ff">
+
+
 ### Add this statement to linux-yocto_5.2.bb file.
 
 ```bash
