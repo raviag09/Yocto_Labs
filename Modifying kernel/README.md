@@ -44,7 +44,7 @@ $cd poky/build/tmp/work-shared/qemux86–64/kernel-source
 $make kernelversion
 ```
 
-### Modifying USB Driver:Go to usb.c or usb-skeleton.c location and add some printk statements in __init function
+### Modifying USB Driver:Go to usb.c in ./core/usb.c location and add some printk statements in __init function
 
 
 ```bash
