@@ -40,7 +40,7 @@ source oe-init-build-env meta-custom
 
 Customize Configuration:
 
-Edit the conf/local.conf file  to customize your build. You can specify the target machine and other build settings. For example:
+Edit the conf/local.conf file (~/poky-dunfell-23.0.2/meta-custom/conf$ view local.conf) to customize your build. You can specify the target machine and other build settings. For example:
 
 ```bash
 
@@ -52,7 +52,11 @@ The qemu-x86-64 machine represents a 64-bit x86 QEMU emulator.
 
 Create a Custom Image Recipe:
 
-Create a custom image recipe to define the contents and configuration of your x86 emulation image. Create a file named my-x86-image.bb (or any name you prefer) in the build-x86 directory:
+Create a custom image recipe to define the contents and configuration of your x86 emulation image. Create a file named my-x86-image.bb (or any name you prefer) in the directory:
+ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/meta-custom/recipes-example$ mkdir images
+ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/meta-custom/recipes-example$ touch my-x86-image.bb
+ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/meta-custom/recipes-example$ view my-x86-image.bb
+
 
 ```bash
 
@@ -97,7 +101,7 @@ Build Your Custom x86 Emulation Image with Python Packages:
 Build your custom x86 emulation image with the specified Python packages using the bitbake command:
 
 ```bash
-bitbake my-x86-image
+bitbake core-image-minimal
 ```
 
 Run QEMU with Your Custom Image:
