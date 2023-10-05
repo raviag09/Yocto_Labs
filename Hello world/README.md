@@ -117,7 +117,7 @@ ubuntu@ip-172-31-54-223:~/poky-dunfell-23.0.2/build$ bitbake core-image-minimal
 ###Simulate Image Using QEMU
 
 ```bash
- $ runqemu qemux86-64
+ $ runqemu qemux86-64 nographic
  
  ```
 ### login as root and run the hello command on /usr/bin
