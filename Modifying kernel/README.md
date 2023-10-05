@@ -52,7 +52,7 @@ $cd poky/build/tmp/work-shared/qemux86-64/kernel-source/drivers/usb
 $vi usb.c
 Go to usb_init function and add below lines:
 printk(KERN_INFO"hello :USB Driver Initialized"); printk(KERN_INFO"hello :Patch applied successfully");
-printk(KERN_INFO"hello :Lab 03: Done");
+printk(KERN_INFO"hello: Done");
 ```
 
 
